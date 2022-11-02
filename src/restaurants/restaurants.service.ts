@@ -11,8 +11,8 @@ export class RestaurantsService {
     return await this.restaurantRepository.find();
   }
 
-  showById(id: string): Restaurant {
-    const found = this.restaurants.find((restaurant) => restaurant.id === id);
+  async showById(id: string): Promise<Restaurant> {
+    const found = await this.restaurantRepository.findOne({ id });
     if (!found) {
       throw new NotFoundException();
     }
@@ -25,9 +25,7 @@ export class RestaurantsService {
     );
   }
 
-  delete(id: string): void {
-    this.restaurants = this.restaurants.filter(
-      (restaurant) => restaurant.id !== id,
-    );
+  async delete(id: string): Promise<void> {
+    await this.restaurantRepository.delete(id);
   }
 }

@@ -20,8 +20,8 @@ export class RestaurantsController {
   }
 
   @Get(':id')
-  showById(@Param('id', ParseUUIDPipe) id: string): Restaurant {
-    return this.restaurantsService.showById(id);
+  async showById(@Param('id', ParseUUIDPipe) id: string): Promise<Restaurant> {
+    return await this.restaurantsService.showById(id);
   }
 
   @Post()
@@ -32,7 +32,7 @@ export class RestaurantsController {
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseUUIDPipe) id: string) {
-    this.restaurantsService.delete(id);
+  async delete(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+    await this.restaurantsService.delete(id);
   }
 }
