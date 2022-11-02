@@ -37,3 +37,4 @@ lerna-debug.log*
 
 .tool-versions
 docker-compose.yaml
+ormconfig.js
