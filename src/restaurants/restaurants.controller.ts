@@ -15,8 +15,8 @@ import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
   @Get()
-  showAll(): Restaurant[] {
-    return this.restaurantsService.showAll();
+  async showAll(): Promise<Restaurant[]> {
+    return await this.restaurantsService.showAll();
   }
 
   @Get(':id')

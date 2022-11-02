@@ -1,15 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Restaurant } from './restaurant.model';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { v4 as uuid } from 'uuid';
 import { RestaurantRepository } from './restaurant.repository';
 @Injectable()
 export class RestaurantsService {
   constructor(private readonly restaurantRepository: RestaurantRepository) {}
   private restaurants = [];
 
-  showAll(): Restaurant[] {
-    return this.restaurants;
+  async showAll(): Promise<Restaurant[]> {
+    return await this.restaurantRepository.find();
   }
 
   showById(id: string): Restaurant {
