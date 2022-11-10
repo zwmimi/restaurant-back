@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Restaurant } from './restaurant.model';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantRepository } from './restaurant.repository';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 @Injectable()
 export class RestaurantsService {
   constructor(private readonly restaurantRepository: RestaurantRepository) {}
@@ -25,6 +26,14 @@ export class RestaurantsService {
     );
   }
 
+  async update(updateRestaurantDto: UpdateRestaurantDto) {
+    const restaurant = await this.showById(updateRestaurantDto.id);
+    restaurant.name = updateRestaurantDto.name;
+    restaurant.url = updateRestaurantDto.url;
+    restaurant.description = updateRestaurantDto.description;
+    await this.restaurantRepository.save(restaurant);
+    return restaurant;
+  }
   async delete(id: string): Promise<void> {
     await this.restaurantRepository.delete(id);
   }
