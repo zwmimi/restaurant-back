@@ -6,7 +6,6 @@ import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 @Injectable()
 export class RestaurantsService {
   constructor(private readonly restaurantRepository: RestaurantRepository) {}
-  private restaurants = [];
 
   async showAll(): Promise<Restaurant[]> {
     return await this.restaurantRepository.find();
